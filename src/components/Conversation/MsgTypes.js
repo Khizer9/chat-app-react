@@ -6,7 +6,7 @@ import { Message_options } from '../../data'
 
 
 
-const DocMsgs = ({el}) => {
+const DocMsgs = ({el, menu}) => {
     const theme = useTheme()
   return (
     <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
@@ -27,13 +27,13 @@ const DocMsgs = ({el}) => {
                 </Typography>
             </Stack>
         </Box>
-        <MessageOptions />
+        {menu && <MessageOptions />}
     </Stack>
   )
 }
 
 
-const LinkMsgs = ({el}) => {
+const LinkMsgs = ({el, menu}) => {
     const theme = useTheme()
   return (
     <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
@@ -51,13 +51,13 @@ const LinkMsgs = ({el}) => {
                 </Stack>
             </Stack>
         </Box>
-        <MessageOptions />
+        {menu && <MessageOptions />}
     </Stack>
   )
 }
 
 
-const ReplyMsgs = ({el}) => {
+const ReplyMsgs = ({el, menu}) => {
     const theme = useTheme()
   return (
     <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
@@ -73,12 +73,13 @@ const ReplyMsgs = ({el}) => {
                 </Typography>
             </Stack>
         </Box>
-        <MessageOptions />
+        {menu && <MessageOptions />}
+        
     </Stack>
   )
 }
 
-const MediaMsgs = ({el}) => {
+const MediaMsgs = ({el, menu}) => {
     const theme = useTheme()
   return (
     <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
@@ -90,12 +91,13 @@ const MediaMsgs = ({el}) => {
                 </Typography>
             </Stack>
         </Box>
-        <MessageOptions />
+        {menu && <MessageOptions />}
+        
     </Stack>
   )
 }
 
-const TextMsgs = ({el}) => {
+const TextMsgs = ({el, menu}) => {
     const theme = useTheme()
   return (
     <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
@@ -104,7 +106,8 @@ const TextMsgs = ({el}) => {
                 {el.message}
             </Typography>
         </Box>
-        <MessageOptions />
+        {menu &&  <MessageOptions />}
+       
     </Stack>
   )
 }
