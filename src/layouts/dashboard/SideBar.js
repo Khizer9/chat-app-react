@@ -8,11 +8,13 @@ import { faker } from "@faker-js/faker";
 import { useState } from "react";
 import useSettings from '../../hooks/useSettings'
 import AntSwitch from "../../components/AntSwitch";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
     const [selected, setSelected] = useState(0);
     const theme = useTheme(); 
     const {onToggleMode} = useSettings()
+    const navigate = useNavigate()
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -22,6 +24,10 @@ const SideBar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleSetting = () => {
+      navigate('/settings')
+    }
 
   return (
     <Box
@@ -37,11 +43,13 @@ const SideBar = () => {
         <Stack direction="column" height='85%' alignItems="center" spacing={3} justifyContent='space-between'>
           <Stack alignItems='center' spacing={4}>
             <Box
+              onClick={() => navigate('/app')}
               sx={{
                 backgroundColor: theme.palette.primary.main,
                 height: 64,
                 width: 64,
                 borderRadius: "12px",
+                cursor: 'pointer'
               }}
             >
               <img src={Logo} alt="Logo" />
@@ -85,7 +93,7 @@ const SideBar = () => {
                 sx={{ backgroundColor: theme.palette.primary.main }}
                 borderRadius="12px"
               >
-                <IconButton sx={{ width: "max-content", color: "white" }}>
+                <IconButton onClick={handleSetting} sx={{ width: "max-content", color: "white" }}>
                   <Gear />
                 </IconButton>
               </Box>
