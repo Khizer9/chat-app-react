@@ -20,13 +20,44 @@ const SideBar = () => {
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-    const handleSetting = () => {
-      navigate('/settings')
+    const getPath = (index) => {
+      switch (index) {
+        case 0:
+          return '/app'
+        case 1:
+          return '/group'
+          
+        case 2:
+          return '/call'
+          
+        case 3:
+          return '/settings'
+      
+        default:
+          break;
+      }
+    }
+
+    const getMenuPath = (index) => {
+      switch (index) {
+        case 0:
+          return '/profile'
+        case 1:
+          return '/settings'
+        case 2:
+          // update token 
+          return '/auth/login'
+          
+      
+        default:
+          break;
+      }
     }
 
   return (
@@ -76,7 +107,10 @@ const SideBar = () => {
                   </Box>
                 ) : (
                   <IconButton
-                    onClick={() => setSelected(item.index)}
+                    onClick={() => {
+                      setSelected(item.index)
+                      navigate(getPath(item.index))
+                    }}
                     sx={{ width: "max-content", color: theme.palette.mode === 'light' ? "black" : theme.palette.text.primary}}
                     key={item.index}
                   >
@@ -93,13 +127,16 @@ const SideBar = () => {
                 sx={{ backgroundColor: theme.palette.primary.main }}
                 borderRadius="12px"
               >
-                <IconButton onClick={handleSetting} sx={{ width: "max-content", color: "white" }}>
+                <IconButton sx={{ width: "max-content", color: "white" }}>
                   <Gear />
                 </IconButton>
               </Box>
             ) : (
               <IconButton
-                onClick={() => setSelected(3)}
+                onClick={() => {
+                  setSelected(3)
+                  navigate(getPath(3))
+                }}
                 sx={{ width: "max-content", color: theme.palette.mode === 'light' ? "black" : theme.palette.text.primary }}
               >
                 <Gear />
@@ -134,9 +171,13 @@ const SideBar = () => {
         }}
       >
         <Stack spacing={1} px={1}>
-            {Profile_Menu.map((el) => (
-                <MenuItem onClick={handleClick}>
-                  <Stack sx={{width:100}} direction='row' alignItems='center' justifyContent='space-between'>
+            {Profile_Menu.map((el, idx) => (
+                <MenuItem onClick={() => {
+                  handleClick();
+                }}>
+                  <Stack onClick={() => {
+                    navigate(getMenuPath(idx))
+                  }} sx={{width:100}} direction='row' alignItems='center' justifyContent='space-between'>
                     <span>{el.title}</span>
                     {el.icon}
                   </Stack>
